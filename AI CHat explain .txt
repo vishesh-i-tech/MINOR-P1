@@ -1,0 +1,752 @@
+I want to continue working on my Minor Project in this chat. Treat everything below as the complete project context and keep it consistent throughout the conversation. Do not make me explain the project again unless I explicitly change something.
+
+# PROJECT CONTEXT
+
+We are implementing the Smart India Hackathon Problem Statement:
+
+SIH25102 — AI-based drop-out prediction and counseling system
+Organization: Government of Rajasthan
+Theme: Smart Automation
+
+We are NOT building only a basic dropout prediction model.
+
+Our project is:
+
+# Student Retention Intelligence Platform
+
+Subtitle:
+An Explainable AI-Based Early Warning, Counseling and Intervention System for Student Retention.
+
+## Core Idea
+
+We are building an AI-based system that identifies students who may be at risk of dropping out BEFORE dropout actually happens and helps authorized counselors take appropriate action.
+
+The system analyzes available student data such as:
+
+- Attendance
+- Grades / academic performance
+- Assignment submissions
+- Engagement/activity data
+- Other justified student-related features available in the dataset
+
+It generates a dropout-risk score.
+
+Example:
+
+Student → 78% High Risk
+
+But the system should NOT stop there.
+
+It should also explain WHY the student has a high risk.
+
+Example:
+
+- Low attendance → major contributor
+- Declining grades → significant contributor
+- Missed assignments → contributor
+
+We plan to use Explainable AI, especially SHAP, to generate these explanations.
+
+Then the system should recommend a suitable intervention category based on the identified risk drivers.
+
+Example:
+
+Low attendance
+→ Attendance counseling
+
+Academic decline
+→ Academic support / mentoring
+
+Financial-related issue
+→ Relevant institutional support information
+
+The counselor remains the human decision-maker. The AI supports the counselor; it does not automatically decide the student's future.
+
+After the counselor takes action, the intervention is recorded.
+
+Later, when new student data becomes available, the system recalculates the student's risk.
+
+Example:
+
+78% → Intervention → 52% → Follow-up → 31%
+
+This creates a longitudinal risk trajectory.
+
+The purpose is to observe whether the student's situation improved after intervention.
+
+Important:
+A decrease in risk after intervention should be treated as an observed outcome/association, NOT automatically claimed as proof that the intervention caused the improvement.
+
+# CORE WORKFLOW
+
+The complete concept is:
+
+Predict
+↓
+Explain
+↓
+Decide
+↓
+Intervene
+↓
+Follow-up
+↓
+Measure
+↓
+Re-score
+
+This closed-loop workflow is the central idea of our project.
+
+# WHY WE ARE EXTENDING SIH25102
+
+The official PS asks for:
+
+"AI-based drop-out prediction and counseling system."
+
+A basic implementation could simply:
+
+Student Data
+→ ML Model
+→ Dropout Prediction
+→ Dashboard
+
+We want to implement a more complete institutional decision-support workflow:
+
+Student Data
+→ Risk Prediction
+→ Explainable Risk Factors
+→ Intervention Recommendation
+→ Counselor Action
+→ Follow-up
+→ Recalculation
+→ Longitudinal Risk Tracking
+→ Intervention Outcome Measurement
+
+So our project is still SIH25102.
+
+We are implementing the PS as a more complete Student Retention Intelligence Platform rather than stopping at one-time prediction.
+
+Do NOT describe it as a completely new invention or claim that dropout prediction/SHAP is globally unique.
+
+Our differentiation is the integrated closed-loop system combining:
+
+- Cloud infrastructure
+- Explainable AI
+- Risk prediction
+- Root-cause/driver analysis
+- Intervention support
+- Counselor workflow
+- Follow-up tracking
+- Longitudinal risk trajectory
+- Intervention-effect measurement
+- Security
+- Reusable infrastructure
+
+# TWO-PHASE ARCHITECTURE
+
+We are deliberately building the project in TWO PHASES.
+
+## PHASE 1 — Azure Cloud Infrastructure Foundation
+
+Phase 1 is the cloud/infrastructure foundation on which our application will run.
+
+We are using:
+
+- Microsoft Azure
+- Terraform
+- Infrastructure as Code (IaC)
+- Azure Storage
+- Azure Linux VM / Compute
+- Virtual Networking
+- Security baseline
+- Azure Key Vault
+- YAML-driven configuration
+- Terraform modules
+- Infrastructure validation
+- CI/CD
+
+The idea is:
+
+Instead of manually creating Azure resources through the Azure Portal, we define the infrastructure using Terraform.
+
+The infrastructure should be:
+
+- Reusable
+- Modular
+- Configurable
+- Secure
+- Repeatable
+- Reviewable
+- Automated
+
+Important concept:
+
+Phase 1 is NOT a separate project from SIH25102.
+
+It is the infrastructure foundation for the SIH25102 application.
+
+However, because the infrastructure is modular and reusable, its components can later be adapted for other applications with similar cloud requirements.
+
+Our PRIMARY use case remains:
+
+SIH25102 — Student Retention Intelligence Platform.
+
+## PHASE 1 ARCHITECTURE
+
+The intended structure is approximately:
+
+Configuration
+    ↓
+YAML / Terraform Variables
+    ↓
+Terraform Modules
+    ↓
+Terraform Provisioning
+    ↓
+Azure Foundation
+    ↓
+Phase 2 Application
+
+Terraform modules may include:
+
+modules/
+├── resource_group/
+├── storage/
+├── virtual_machine/
+├── networking/
+├── security/
+└── key_vault/
+
+Environment configuration:
+
+environments/
+├── dev/
+└── production/
+
+Configuration:
+
+config/
+└── *.yaml
+
+Infrastructure workflow:
+
+terraform init
+↓
+terraform validate
+↓
+terraform plan
+↓
+Review / CI
+↓
+terraform apply
+↓
+Azure Resources
+
+The architecture should also support dynamic/iterative provisioning where appropriate, for example creating storage containers/file shares based on configuration rather than duplicating Terraform blocks.
+
+Security principles:
+
+- Avoid unnecessary public network exposure
+- Use HTTPS/TLS where applicable
+- Do not store credentials/secrets in source code
+- Use identity-based access where supported
+- Use Azure Key Vault for secrets
+- Apply security defaults through Terraform
+- Keep authentication/authorization concerns separate from application logic
+
+# PHASE 2 — STUDENT RETENTION INTELLIGENCE PLATFORM
+
+Phase 2 is the actual SIH25102 application.
+
+It will include:
+
+1. Student Data Ingestion
+2. Data Validation
+3. Feature Engineering
+4. Dropout Risk Prediction
+5. Explainable AI / SHAP
+6. Risk Driver / Root-Cause Analysis
+7. Intervention Recommendation
+8. Counselor Dashboard
+9. Counselor Case Management
+10. Intervention Logging
+11. Follow-up Tracking
+12. Longitudinal Risk Tracking
+13. Re-scoring
+14. Intervention Outcome Measurement
+15. Analytics
+16. Optional alerts
+
+# PHASE 2 FLOW
+
+Student Data
+↓
+Data Validation
+↓
+Feature Preparation
+↓
+ML Model
+↓
+Dropout Risk Score
+↓
+SHAP Explanation
+↓
+Risk Drivers
+↓
+Intervention Recommendation
+↓
+Counselor Review
+↓
+Intervention
+↓
+Follow-up
+↓
+New Student Data
+↓
+Re-score
+↓
+Risk Trajectory
+↓
+Measure Outcome
+
+# MACHINE LEARNING
+
+For ML, we are considering:
+
+- Logistic Regression as baseline
+- Random Forest
+- XGBoost
+- LightGBM
+
+Do not automatically decide which model is final.
+
+We should compare models using appropriate evaluation metrics.
+
+Potential metrics:
+
+- Precision
+- Recall
+- F1-score
+- Confusion Matrix
+- ROC-AUC
+- PR-AUC where appropriate
+- Calibration if we present probabilities
+
+Accuracy alone should NOT be treated as the main success metric, especially if the classes are imbalanced.
+
+We also need to avoid data leakage.
+
+The exact final model will be selected based on experimentation and evaluation.
+
+# EXPLAINABLE AI
+
+We plan to use SHAP.
+
+Purpose:
+
+The system should explain why a particular student received a particular prediction.
+
+Example:
+
+Risk = 78%
+
+Contributors:
+
+Attendance decline → increases predicted risk
+Missed assignments → increases predicted risk
+Academic decline → increases predicted risk
+
+Important:
+
+SHAP contributors are NOT guaranteed causal reasons.
+
+Use terminology like:
+
+"Important model contributors"
+
+rather than:
+
+"These are definitely the reasons the student will drop out."
+
+# COUNSELING / INTERVENTION LAYER
+
+This is one of the important parts of our project.
+
+The system should translate identified risk drivers into possible intervention categories.
+
+Examples:
+
+Attendance issue
+→ Attendance counseling / engagement check
+
+Academic performance decline
+→ Academic support / mentoring / tutoring
+
+Financial difficulty
+→ Relevant financial-support information
+
+Multiple risk factors
+→ General counseling / case review
+
+The AI provides recommendations.
+
+The counselor reviews the situation and decides what action to take.
+
+The system should allow the counselor to:
+
+- Accept recommendation
+- Modify recommendation
+- Reject recommendation
+- Add notes
+- Record intervention
+- Set follow-up date
+
+# LONGITUDINAL TRACKING
+
+This is a major part of our intended project.
+
+Instead of treating prediction as a one-time event, we store risk history.
+
+Example:
+
+Date 1:
+Risk = 78%
+
+Intervention:
+Attendance counseling
+
+Date 2:
+Risk = 52%
+
+Follow-up:
+Counselor review
+
+Date 3:
+Risk = 31%
+
+The dashboard can show a risk trajectory.
+
+This lets the institution observe:
+
+- Risk movement
+- Intervention history
+- Follow-up completion
+- Student status over time
+- Intervention outcomes
+
+Again, we should not claim that a risk decrease proves the intervention caused the improvement.
+
+# COUNSELOR DASHBOARD
+
+The application should have a counselor-facing interface.
+
+Possible modules:
+
+## Risk Overview
+
+- Total monitored students
+- High-risk students
+- Medium-risk students
+- Low-risk students
+- Newly elevated-risk students
+- Students requiring follow-up
+
+## Student Detail
+
+Show:
+
+- Student information
+- Current risk
+- Risk category
+- Important model contributors
+- Feature values
+- SHAP explanation
+- Historical risk trajectory
+- Previous interventions
+- Follow-up history
+
+## Case Management
+
+- Open cases
+- Assigned counselor
+- Intervention
+- Status
+- Follow-up date
+- Notes
+- Action history
+
+## Intervention Analytics
+
+- Intervention categories
+- Follow-up completion
+- Risk movement
+- Intervention history
+- Model performance
+- Alert volume
+
+# DATA
+
+For development, we will initially use a public/de-identified student dropout dataset, such as the UCI-based "Predict Students' Dropout and Academic Success" dataset / suitable Kaggle version.
+
+We should NOT assume we have access to real college student data.
+
+If real institutional data is ever used, it requires proper authorization and privacy controls.
+
+Potential feature categories:
+
+Academic:
+- Grades
+- GPA
+- Failed subjects
+- Academic trend
+
+Attendance:
+- Attendance percentage
+- Attendance trend
+
+Engagement:
+- Assignment completion
+- LMS activity if available
+
+Financial/administrative:
+- Fee-related status if legitimately available
+
+Demographic/context features:
+- Only where justified and appropriate
+
+Do not add features simply because they improve model accuracy.
+
+# TECHNOLOGY STACK
+
+Current intended stack:
+
+Cloud:
+Microsoft Azure
+
+Infrastructure:
+Terraform
+
+Configuration:
+YAML + Terraform variables
+
+Compute:
+Azure Linux VM / suitable Azure compute
+
+Storage:
+Azure Storage
+
+Secrets:
+Azure Key Vault
+
+Backend:
+Python + FastAPI/Flask
+
+ML:
+Python
+pandas
+scikit-learn
+XGBoost / LightGBM
+
+Explainability:
+SHAP
+
+Frontend:
+React
+
+Visualization:
+Plotly or equivalent
+
+CI/CD:
+GitHub Actions or equivalent
+
+Version control:
+Git + GitHub
+
+These are proposed technologies, not all mandatory requirements of the SIH PS.
+
+# PROJECT DEVELOPMENT ORDER
+
+We should follow this order:
+
+1. Understand PS
+2. Finalize requirements
+3. Finalize architecture
+4. Design data schema
+5. Create GitHub repository
+6. Build Phase 1 Azure foundation
+7. Learn and implement Terraform modules
+8. Configure networking/security/Key Vault
+9. Build data pipeline
+10. Perform EDA
+11. Build baseline ML model
+12. Compare stronger models
+13. Finalize model
+14. Implement SHAP
+15. Build backend
+16. Build counselor dashboard
+17. Implement intervention workflow
+18. Implement follow-up
+19. Implement longitudinal risk tracking
+20. Integrate everything
+21. Test
+22. Deploy
+23. Prepare documentation
+24. Prepare final demo/presentation
+
+Do NOT jump directly into UI before the underlying data/model/API flow is understood.
+
+# MVP PRIORITY
+
+The core MVP must demonstrate:
+
+Student Data
+→ Prediction
+→ Explanation
+→ Counselor Action
+→ Follow-up
+→ Re-score
+→ Risk History
+
+Advanced features should come only after the core loop works.
+
+Potential advanced features:
+
+- Automated alerts
+- Advanced intervention recommendation
+- Fairness dashboard
+- More advanced analytics
+- Automated scheduled ingestion
+- Advanced model monitoring
+- More sophisticated case management
+
+# IMPORTANT PROJECT POSITIONING
+
+When explaining this project:
+
+DO say:
+
+"We are implementing SIH25102 as a complete Student Retention Intelligence Platform."
+
+DO say:
+
+"Phase 1 provides a reusable Azure infrastructure foundation, while SIH25102 is the primary application deployed on it."
+
+DO say:
+
+"The system is designed as a closed-loop early-warning and intervention system."
+
+DO say:
+
+"The AI supports counselors rather than replacing them."
+
+DO NOT say:
+
+"We invented dropout prediction."
+
+DO NOT say:
+
+"Our system guarantees prevention of dropout."
+
+DO NOT say:
+
+"SHAP tells us the actual cause of dropout."
+
+DO NOT say:
+
+"The model automatically decides which students should be punished/rejected/etc."
+
+DO NOT say:
+
+"Phase 1 is a completely separate project."
+
+# TEAM CONTEXT
+
+This is a Minor Project.
+
+Team size:
+2 members.
+
+We want the project to be technically strong, practical, useful and portfolio-worthy.
+
+The project should demonstrate:
+
+- Cloud
+- Terraform / IaC
+- Azure
+- Machine Learning
+- Explainable AI
+- Backend
+- Frontend
+- Deployment
+- Security
+- Real-world workflow
+
+We have limited development time, so scope must be controlled.
+
+# HOW I WANT YOU TO HELP ME
+
+Act like a technical team leader/mentor for this project.
+
+When I ask something:
+
+1. Explain it from the project's perspective.
+2. Tell me WHERE it fits in our architecture.
+3. Explain WHY we need it.
+4. Explain HOW we will implement it.
+5. If there are multiple options, compare them.
+6. Tell me what I should learn before implementing it.
+7. Give practical implementation steps.
+8. Keep our existing architecture consistent.
+9. Do not randomly change the project concept.
+10. If you think a previous decision should change, explain why before changing it.
+11. Distinguish clearly between:
+   - confirmed project requirement
+   - our proposed design
+   - optional feature
+   - future/advanced feature
+12. Do not overcomplicate explanations initially. Start simple, then go deeper when required.
+
+I may ask very basic questions such as:
+"Terraform kya hai?"
+"VNet kya hai?"
+"SHAP kaise kaam karta hai?"
+"Backend kaise connect hoga?"
+"Database kaha hoga?"
+"Phase 1 aur Phase 2 ka connection kya hai?"
+
+Even if the question is basic, explain it specifically in the context of THIS project.
+
+# MOST IMPORTANT THING
+
+Always keep this mental model:
+
+                    SIH25102
+                       │
+                       ▼
+        Student Retention Intelligence Platform
+                       │
+        ┌──────────────┴──────────────┐
+        ▼                             ▼
+   PHASE 1                         PHASE 2
+Azure Cloud Foundation       AI Retention Application
+        │                             │
+   Terraform                    Student Data
+   Azure Storage                ML Prediction
+   Linux VM                     SHAP
+   Networking                   Intervention
+   Security                     Counselor
+   Key Vault                    Follow-up
+   YAML                         Risk Tracking
+   CI/CD                        Measurement
+        │                             │
+        └──────────────┬──────────────┘
+                       ▼
+              COMPLETE SYSTEM
+
+Core loop:
+
+Predict → Explain → Decide → Intervene → Follow-up → Measure → Re-score
+
+This is the project we are building.
+
+Start the new conversation by acknowledging that you have understood this complete project context, then wait for my next task. Do NOT ask me to explain the project again.
